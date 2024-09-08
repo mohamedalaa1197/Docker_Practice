@@ -1,4 +1,10 @@
 services:
   node-app: 
+    build:
+      context: .
+      args:
+        - NODE_ENV=production
+
     environment:
       - NODE_env=Production
+    command: npm start
