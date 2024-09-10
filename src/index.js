@@ -1,8 +1,8 @@
 const express = require('express');
 const PORT = 4000;
 const app = express();
-const mongoose = require('mongoose');
 const redis = require('redis');
+const {Pool, Client} = require('pg');
 
 const redisClient = redis.createClient({
     url: `redis://redis:6379`,
@@ -14,14 +14,18 @@ redisClient.connect();
 
 const username = 'root'
 const password = 'example'
-const port = '27017'
+const port = '5432'
+var host = 'postgres'
 
-var host = 'mongo'
+const URI = `postgres://${username}:${password}@${host}:${port}`;
 
-mongoose.connect(`mongodb://${username}:${password}@${host}:${port}`)
-.then(() => console.log('Connectted to MongoDB'))
-.catch(err => console.log('Error connecting to MongoDB, ', err)) ;
+const cleint = new Client({
+    connectionString: URI
+});
 
+cleint.connect()
+.then(() => console.log('Connected to Postgres'))
+.catch(err => console.log('Error connecting to Postgres ' + err));
 
 app.get('/', (req, res) => {    
     res.send('<h1>Hello World! From Alaa 12 </h1>'); 
