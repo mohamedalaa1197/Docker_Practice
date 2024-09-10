@@ -28,7 +28,7 @@ cleint.connect()
 .catch(err => console.log('Error connecting to Postgres ' + err));
 
 app.get('/', (req, res) => {    
-    res.send('<h1>Hello World! From Alaa 12 </h1>'); 
+    res.send('<h1>Hello World! From AWS, using Docker Hub</h1>'); 
 });
 
 app.listen(PORT, () => {
