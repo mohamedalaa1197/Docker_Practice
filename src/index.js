@@ -3,7 +3,7 @@ const PORT = 4000;
 const app = express();
 const redis = require('redis');
 const {Pool, Client} = require('pg');
-
+const os = require('os');
 const redisClient = redis.createClient({
     url: `redis://redis:6379`,
 });
@@ -28,6 +28,7 @@ cleint.connect()
 .catch(err => console.log('Error connecting to Postgres ' + err));
 
 app.get('/', (req, res) => {    
+    console.log('Request received from ' + os.hostname());
     res.send('<h1>Hello World! From AWS, using Docker Hub</h1>'); 
 });
 

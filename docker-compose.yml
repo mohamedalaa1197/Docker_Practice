@@ -1,9 +1,14 @@
 services:
   node-app: 
-    container_name: express-node-app-container
-    image: mohamedalaa1197/tresmerge-docker:tagname
-    ports:
-      - "4000:4000"
+  # Container name can't be used when doing `docker-compose up --scale node-app=3`  as each container should have a unique name.
+    # container_name: express-node-app-container
+    image: mohamedalaa1197/tresmerge-docker
+    # we already use Nginx as a reverse proxy, so we don't need to expose the port.
+    # also ports cant be used with `docker-compose up --scale node-app=3` as it will cause a conflict.
+    
+    # ports:
+    #   - "4000:4000"
+    #
     env_file:
       - ./.env
     depends_on:
